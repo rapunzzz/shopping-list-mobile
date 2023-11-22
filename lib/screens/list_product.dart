@@ -8,11 +8,12 @@ class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  _ProductPageState createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
   Future<List<Product>> fetchProduct() async {
+    // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url = Uri.parse('http://127.0.0.1:8000/json/');
     var response = await http.get(
       url,
@@ -23,24 +24,20 @@ class _ProductPageState extends State<ProductPage> {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // melakukan konversi data json menjadi object Product
-    List<Product> listProduct = [];
+    List<Product> list_product = [];
     for (var d in data) {
       if (d != null) {
-        listProduct.add(Product.fromJson(d));
+        list_product.add(Product.fromJson(d));
       }
     }
-    return listProduct;
+    return list_product;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Center(
-            child: Text('Daftar Produk'),
-          ),
-          backgroundColor: Colors.pink.shade900,
-          foregroundColor: Colors.white,
+          title: const Text('Product'),
         ),
         drawer: const LeftDrawer(),
         body: FutureBuilder(
