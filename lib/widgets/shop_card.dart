@@ -56,7 +56,8 @@ class ShopCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ProductPage()));
+                        // ignore: prefer_const_constructors
+                        builder: (context) => ProductPage()));
               } else if (item.name == "Logout") {
                 final response =
                     await request.logout("http://127.0.0.1:8000/auth/logout/");
